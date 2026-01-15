@@ -1,0 +1,43 @@
+services:
+  db-n8n:
+    image: postgres:16-alpine
+    container_name: db-n8n
+    restart: always
+    environment:
+      - POSTGRES_USER=n8n_user
+      - POSTGRES_PASSWORD=n8n_password
+      - POSTGRES_DB=n8n_db
+    volumes:
+      - postgres_n8n_data:/var/lib/postgresql/data
+    networks:
+      - infra-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U n8n_user -d n8n_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  db-fun:
+    image: postgres:16-alpine
+    container_name: db-fun
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=fun_user
+      - POSTGRES_PASSWORD=fun_password
+      - POSTGRES_DB=playground
+    volumes:
+      - postgres_fun_data:/var/lib/postgresql/data
+    networks:
+      - infra-network
+
+networks:
+  infra-network:
+    external: true
+
+volumes:
+  postgres_n8n_data:
+    external: true
+  postgres_fun_data:
+    external: true
