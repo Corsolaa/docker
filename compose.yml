@@ -1,0 +1,5 @@
+name: my-stack
+
+include:
+  - path: ./apps/docker-compose.yml
+  - path: ./databases/docker-compose.yml

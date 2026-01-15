@@ -16,6 +16,8 @@ services:
       - DB_POSTGRESDB_DATABASE=n8n_db
       - DB_POSTGRESDB_USER=n8n_user
       - DB_POSTGRESDB_PASSWORD=n8n_password
+    depends_on:
+      - db-n8n
 
   ollama:
     image: ollama/ollama:latest
@@ -48,6 +50,8 @@ services:
       - infra-network
     environment:
       - SUPERSET_SECRET_KEY=your_secret_key_here
+    depends_on:
+      - db-fun
     volumes:
       - superset_home:/app/superset_home
 
