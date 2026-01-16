@@ -32,6 +32,18 @@ services:
     networks:
       - infra-network
 
+  keycloak-db:
+    image: postgres:16-alpine
+    container_name: keycloak-db
+    volumes:
+      - keycloak_db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: password123
+    networks:
+      - infra-network
+
 networks:
   infra-network:
     external: true
@@ -40,4 +52,6 @@ volumes:
   postgres_n8n_data:
     external: true
   postgres_fun_data:
+    external: true
+  keycloak_db_data:
     external: true
