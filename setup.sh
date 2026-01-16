@@ -7,6 +7,8 @@ echo "Creating External Volumes..."
 docker volume create n8n || true
 docker volume create ollama || true
 docker volume create superset_home || true
+docker volume create postgres_n8n_data || true
+docker volume create postgres_fun_data || true
 docker volume create keycloak_db_data || true
 
 echo "All set! You can now run docker-compose in your folders."

@@ -32,7 +32,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '15.0'  # Limits the container to the power of 15 cores
+          cpus: '10'  # Limits the container to the power of 15 cores
         reservations:
           devices:
             - driver: nvidia
