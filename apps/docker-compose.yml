@@ -28,6 +28,16 @@ services:
       - ollama:/root/.ollama
     networks:
       - infra-network
+    # Comment the following lines to disable GPU support
+    deploy:
+      resources:
+        limits:
+          cpus: '15.0'  # Limits the container to the power of 15 cores
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all        # Use all available GPUs
+              capabilities: [gpu]
 
   ollama-pull:
     image: ollama/ollama:latest
